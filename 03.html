@@ -3,229 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국 인터넷 이용 행태 분석 리포트</title>
+    <title>한국 인터넷 이용 현황 보고서</title>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS for layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
         body {
-            font-family: 'Pretendard', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: #f3f4f6;
+            scroll-behavior: smooth;
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
+
+        .chart-container {
+            position: relative;
+            height: 320px;
+            width: 100%;
         }
-        header {
-            text-align: center;
-            margin-bottom: 60px;
+
+        .home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 50;
+            transition: all 0.3s ease;
         }
-        h1 {
-            font-size: 2.5rem;
-            color: #1a73e8;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-        }
+
         .card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 30px;
-            margin-bottom: 40px;
-            transition: transform 0.3s ease;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
         }
+
         .card:hover {
             transform: translateY(-5px);
         }
-        h2 {
-            border-left: 5px solid #1a73e8;
-            padding-left: 15px;
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-        }
-        .content-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .chart-container {
-            position: relative;
-            height: 400px;
-            width: 100%;
-        }
-        .description {
-            background: #f1f3f4;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            color: #444;
-            word-break: keep-all;
-        }
-        .conclusion {
-            background: #1a73e8;
-            color: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-        }
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #888;
-            font-size: 0.9rem;
+
+        nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
-<body>
+<body class="text-gray-800">
 
-<div class="container">
-    <header>
-        <h1>한국 인터넷 이용 행태 리포트</h1>
-        <p class="subtitle">2017년 - 2024년 데이터 분석 및 트렌드</p>
-    </header>
-
-    <div class="card">
-        <h2>1. 전체 인터넷 이용자 수 및 증감 추이</h2>
-        <div class="content-layout">
-            <div class="chart-container">
-                <canvas id="totalUsersChart"></canvas>
+    <!-- Navigation / Home Button Area -->
+    <nav class="sticky top-0 z-40 w-full border-b border-gray-200 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-xl font-extrabold text-blue-600 tracking-tight">INTERNET REPORT</a>
+            <div class="hidden md:flex space-x-6 text-sm font-semibold">
+                <a href="#total" class="hover:text-blue-500">전체 추이</a>
+                <a href="#senior" class="hover:text-blue-500">고령층</a>
+                <a href="#gender" class="hover:text-blue-500">성별</a>
+                <a href="#skill" class="hover:text-blue-500">역량</a>
             </div>
-            <div class="description">
-                2017년부터 2024년까지 국내 전체 인터넷 이용자 수는 4,528만 명에서 시작하여 2024년 4,818만 명에 도달하며 지속적인 성장세를 보이고 있습니다. 연도별 증감률은 2017년 3.8%로 가장 높은 수치를 기록한 이후 점차 완만해지는 양상을 보였으나, 이용자 절대 수치는 매년 꾸준히 우상향하고 있습니다.
-            </div>
+            <button onclick="window.scrollTo(0,0)" class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg hover:bg-blue-700 transition">
+                HOME
+            </button>
         </div>
-    </div>
+    </nav>
 
-    <div class="card">
-        <h2>2. 60대 이상 고령층의 인터넷 이용 확산</h2>
-        <div class="content-layout">
-            <div class="chart-container">
-                <canvas id="seniorUsersChart"></canvas>
-            </div>
-            <div class="description">
-                가장 눈에 띄는 부분은 60대 이상 고령층의 인터넷 유입입니다. 2017년 약 602만 명이었던 이용자 수는 2024년 1,175만 명을 넘어섰습니다. 이는 7년 만에 규모가 약 2배 가까이 증가한 것으로, 고령층의 디지털 전환이 매우 빠르게 진행되고 있음을 나타냅니다.
-            </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl font-black text-gray-900 mb-4 tracking-tight">[보고서] 한국 인터넷 이용 현황 및 디지털 역량 변화 분석</h1>
+            <p class="text-lg text-gray-600">2017년부터 2024년까지의 장기 지표 및 심층 분석</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            
+            <!-- 1. 전체 이용자 -->
+            <section id="total" class="card p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 text-sm">01</span>
+                    전체 인터넷 이용자 수 및 증감 추이
+                </h2>
+                <div class="chart-container mb-6">
+                    <canvas id="totalChart"></canvas>
+                </div>
+                <div class="text-gray-600 leading-relaxed text-sm space-y-3">
+                    <p>
+                        2017년부터 2024년까지의 장기 데이터를 분석한 결과, 국내 인터넷 이용자 수는 4,528만 명에서 시작하여 2024년 4,818만 명에 도달하며 견고한 성장세를 유지하고 있습니다. 이는 한국 사회의 디지털화가 성숙기를 넘어 보편적 필수 인프라 단계로 진입했음을 시사합니다.
+                    </p>
+                    <p>
+                        연도별 증감률은 2017년 3.8%로 고점을 찍은 이후 시장 포화로 인해 다소 완만해지는 경향을 보였으나, 2022년의 일시적 정체를 지나 2023년과 2024년에 다시 반등하며 질적/양적 성장이 지속되고 있음을 확인할 수 있습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2. 고령층 -->
+            <section id="senior" class="card p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">02</span>
+                    고령층의 인터넷 이용 확산
+                </h2>
+                <div class="chart-container mb-6">
+                    <canvas id="seniorChart"></canvas>
+                </div>
+                <div class="text-gray-600 leading-relaxed text-sm space-y-3">
+                    <p>
+                        가장 주목해야 할 변화는 60대 이상 고령층의 폭발적인 인터넷 유입입니다. 2017년 약 602만 명에 불과했던 고령층 이용자는 2024년 1,175만 명을 기록하며 7년 만에 약 2배 가까이 성장하는 경이로운 기록을 세웠습니다.
+                    </p>
+                    <p>
+                        이러한 '실버 서퍼'의 급증은 모바일 기기의 접근성 향상과 시니어 맞춤형 콘텐츠의 확산에 기인합니다. 이제 인터넷은 고령층에게도 단순한 정보 탐색을 넘어 소통, 여가, 경제 활동의 필수적인 생활 도구로 완벽히 자리 잡았습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. 성별 -->
+            <section id="gender" class="card p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-3 text-sm">03</span>
+                    성별 인터넷 이용 격차 해소와 보편화
+                </h2>
+                <div class="chart-container mb-6">
+                    <canvas id="genderChart"></canvas>
+                </div>
+                <div class="text-gray-600 leading-relaxed text-sm space-y-3">
+                    <p>
+                        그래프를 통해 2017년부터 2024년까지 남녀 인터넷 이용자 수가 꾸준히 동반 상승하고 있음을 알 수 있습니다. 과거 일부 계층의 전유물이었던 인터넷이 이제는 성별에 관계없이 누구나 일상적으로 이용하는 대중 매체로 공고히 자리 잡았습니다.
+                    </p>
+                    <p>
+                        특히 2020년 코로나19 팬데믹은 디지털 전환의 전환점이 되었습니다. 비대면 수업, 온라인 쇼핑, 재택근무가 일상화되면서 여성 이용자의 유입이 가팔라졌고, 결과적으로 남녀 간의 이용자 수 격차는 매년 유의미하게 줄어들며 디지털 평등을 실현하고 있습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 4. 활용 역량 -->
+            <section id="skill" class="card p-8">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">04</span>
+                    정보 활용 및 역량의 고도화
+                </h2>
+                <div class="chart-container mb-6">
+                    <canvas id="skillChart"></canvas>
+                </div>
+                <div class="text-gray-600 leading-relaxed text-sm space-y-3">
+                    <p>
+                        이용자 수의 양적 성장과 더불어 인터넷 활용의 '질적 고도화' 또한 뚜렷하게 관찰됩니다. 2018년 72.3%였던 정보 검색 능력 지표는 2024년 80.8%로 상승하며 이용자들의 디지털 리터러시가 강화되었음을 보여줍니다.
+                    </p>
+                    <p>
+                        단순 접속을 넘어 방대한 데이터 속에서 자신에게 필요한 정보를 정확하게 선별하고, 이를 삶의 문제 해결에 활용하는 역량이 상향 평준화되고 있습니다. 이는 한국이 고도화된 정보화 사회로 성숙해가고 있음을 방증하는 핵심 지표입니다.
+                    </p>
+                </div>
+            </section>
+
         </div>
-    </div>
 
-    <div class="card">
-        <h2>3. 성별 인터넷 이용 격차 해소와 보편화</h2>
-        <div class="content-layout">
-            <div class="chart-container">
-                <canvas id="genderUsersChart"></canvas>
+        <!-- Conclusion Section -->
+        <section class="mt-16 bg-gray-900 text-white p-10 rounded-2xl shadow-2xl">
+            <h2 class="text-3xl font-black mb-6 text-blue-400">[종합 결론]</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-gray-300 leading-relaxed space-y-4">
+                    <p>
+                        분석 결과, 한국의 인터넷 환경은 <span class="text-white font-bold">지속적 이용자 증가, 고령층의 가파른 합류, 성별 격차 완화, 이용 역량 강화</span>라는 네 가지 핵심 축을 중심으로 발전하고 있습니다. 
+                    </p>
+                    <p>
+                        인터넷은 이제 인구 통계학적 특성을 불문하고 모든 국민의 삶을 지탱하는 국가적 핵심 인프라가 되었으며, 국민의 디지털 역량 또한 글로벌 수준으로 상향 평준화되고 있는 것으로 평가됩니다.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 text-sm">#디지털보편화</span>
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 text-sm">#실버디지털</span>
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 text-sm">#격차해소</span>
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 text-sm">#역량강화</span>
+                    <span class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-700 text-sm">#정보화사회</span>
+                </div>
             </div>
-            <div class="description">
-                그래프를 통해 2017년부터 2024년까지 남녀 인터넷 이용자 수가 전반적으로 꾸준히 증가하고 있음을 알 수 있다. 이는 인터넷이 일부 사람들만 사용하는 수단이 아니라, 누구나 일상적으로 이용하는 매체로 자리 잡았다는 것을 보여준다. 즉, 인터넷이 사회 전반에 널리 보급되며 대중화되었음을 확인할 수 있다. <br><br>
-                또한 모든 연도에서 남성 이용자 수가 여성 이용자 수보다 다소 많지만, 여성 이용자 수 역시 지속적으로 증가하고 있다. 이는 인터넷 이용이 특정 성별에 한정되지 않고 남녀 모두에게 보편화되고 있음을 의미한다. 시간이 지날수록 인터넷 접근성과 활용 범위가 넓어지면서 성별에 따른 이용 격차도 점차 줄어들고 있다고 볼 수 있다. <br><br>
-                특히 2020년 이후 남녀 모두 인터넷 이용자 수가 눈에 띄게 증가하는데, 이는 코로나19의 영향이 크다고 볼 수 있다. 코로나로 인해 비대면 수업, 재택근무, 온라인 쇼핑과 같은 활동이 늘어나면서 인터넷은 단순한 선택이 아닌 필수적인 수단이 되었다. 이로 인해 인터넷의 편리성과 중요성이 더욱 강조되었음을 알 수 있다.
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <div class="card">
-        <h2>4. 인터넷 정보 검색 및 활용 역량의 고도화</h2>
-        <div class="content-layout">
-            <div class="chart-container">
-                <canvas id="abilityChart"></canvas>
-            </div>
-            <div class="description">
-                '인터넷 이용자의 정보 검색 능력' 지표를 보면 2018년 72.3%에서 2024년 80.8%로 8.5%p 상승했습니다. 이는 이용자들이 단순히 인터넷에 접속하는 것에 그치지 않고, 방대한 정보 속에서 자신에게 필요한 내용을 정확하게 찾아내고 활용하는 능력이 지속적으로 정교해지고 있음을 시사합니다.
-            </div>
-        </div>
-    </div>
+    <!-- Floating Home Button -->
+    <button onclick="window.scrollTo(0,0)" class="home-btn bg-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-blue-600 hover:scale-110 active:scale-95 border border-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
 
-    <div class="conclusion">
-        <h2 style="color: white; border: none;">종합 결론</h2>
-        <p>한국의 인터넷 환경은 <strong>전체 이용자의 지속적 증가, 고령층의 가파른 합류, 성별 격차 완화, 이용 역량 강화</strong>라는 네 가지 측면에서 고르게 발전하고 있습니다.</p>
-    </div>
-
-    <footer>
-        &copy; 2024 인터넷 이용 행태 분석 리포트 데이터 시각화
+    <footer class="py-12 text-center text-gray-500 text-xs">
+        &copy; 2024 Internet Usage Behavior Analysis. All rights reserved.
     </footer>
-</div>
 
-<script>
-    // 공통 연도 설정
-    const years = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+    <script>
+        const years = ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
 
-    // 1. 전체 이용자 수 차트
-    new Chart(document.getElementById('totalUsersChart'), {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: [{
-                label: '전체 이용자 수 (명)',
-                data: [45283, 46125, 46353, 46819, 47317, 47248, 47747, 48189],
-                borderColor: '#1a73e8',
-                backgroundColor: 'rgba(26, 115, 232, 0.1)',
-                fill: true,
-                tension: 0.3
-            }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
+        // 1. 전체 이용자 차트
+        new Chart(document.getElementById('totalChart'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '이용자(만명)',
+                    data: [4528, 4612, 4635, 4681, 4731, 4724, 4774, 4818],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
 
-    // 2. 60대 이상 고령층 차트
-    new Chart(document.getElementById('seniorUsersChart'), {
-        type: 'bar',
-        data: {
-            labels: years,
-            datasets: [{
-                label: '60대 이상 이용자 수 (명)',
-                data: [6025, 7042, 7327, 8121, 9381, 10032, 11152, 11756],
-                backgroundColor: '#4fc3f7'
-            }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
+        // 2. 고령층 차트
+        new Chart(document.getElementById('seniorChart'), {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: '60대 이상(만명)',
+                    data: [602, 704, 732, 812, 938, 1003, 1115, 1175],
+                    backgroundColor: '#10b981'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
 
-    // 3. 성별 이용자 차트
-    new Chart(document.getElementById('genderUsersChart'), {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: [
-                {
-                    label: '남자 이용자',
-                    data: [23315, 23708, 23733, 23989, 24207, 23972, 24160, 24305],
-                    borderColor: '#1e88e5',
+        // 3. 성별 차트
+        new Chart(document.getElementById('genderChart'), {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    { label: '남성', data: [2331, 2370, 2373, 2398, 2420, 2397, 2416, 2430], borderColor: '#8b5cf6', tension: 0.3 },
+                    { label: '여성', data: [2196, 2241, 2262, 2283, 2311, 2327, 2358, 2388], borderColor: '#f59e0b', tension: 0.3 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // 4. 역량 차트
+        new Chart(document.getElementById('skillChart'), {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: '역량 점수(%)',
+                    data: [72.3, 74.5, 76.1, 75.0, 75.0, 79.1, 80.8],
+                    borderColor: '#ef4444',
+                    borderDash: [5, 5],
                     fill: false
-                },
-                {
-                    label: '여자 이용자',
-                    data: [21968, 22417, 22621, 22830, 23110, 23276, 23587, 23885],
-                    borderColor: '#fb8c00',
-                    fill: false
-                }
-            ]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-
-    // 4. 정보 검색 능력 차트
-    new Chart(document.getElementById('abilityChart'), {
-        type: 'line',
-        data: {
-            labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-            datasets: [{
-                label: '정보 검색 능력 점수 (%)',
-                data: [72.3, 74.5, 76.1, 75.0, 75.0, 79.1, 80.8],
-                borderColor: '#e53935',
-                borderDash: [5, 5],
-                pointBackgroundColor: '#e53935',
-                fill: false
-            }]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-</script>
-
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    </script>
 </body>
 </html>
