@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 부산대 자연과학계열 취업률 vs 경쟁률</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8f9fa; margin: 20px; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .chart-container { position: relative; height: 60vh; width: 100%; margin-top: 20px; }
+        .info-box { display: flex; justify-content: space-around; margin-bottom: 20px; text-align: center; }
+        .stat-card { background: #e9ecef; padding: 15px; border-radius: 10px; width: 30%; }
+        .stat-card h3 { margin: 0; font-size: 14px; color: #666; }
+        .stat-card p { font-size: 24px; font-weight: bold; margin: 5px 0; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📊 2025 부산대 자연과학계열 분석 리포트</h1>
+    
+    <div class="info-box">
+        <div class="stat-card">
+            <h3>최고 경쟁률 학과</h3>
+            <p>통계학과 (11.0:1)</p>
+        </div>
+        <div class="stat-card">
+            <h3>최고 취업률 학과</h3>
+            <p>생명환경화학과 (83.3%)</p>
+        </div>
+        <div class="stat-card">
+            <h3>가성비 추천 (취업 우수)</h3>
+            <p>물리학과 (67.6%)</p>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    const labels = [
+        '간호학과', '대기환경과학과', '동물생명자원과학과', '물리교육과', '물리학과', 
+        '미생물학과', '바이오산업기계공학', '분자생물학과', '생명과학과', '생명환경화학과', 
+        '생물교육과', '수학과', '수학교육과', '식물생명과학과', '식품공학과', 
+        '식품영양학과', '실내환경디자인학과', '원예생명과학과', '의류학과', '지구과학교육과', 
+        '지질환경과학과', '통계학과', '해양학과', '화학과', '화학교육과'
+    ];
+
+    const competitionData = [8.0, 10.7, 10.5, 7.1, 5.8, 8.1, 7.9, 8.3, 7.2, 7.0, 6.5, 6.1, 7.1, 8.6, 9.0, 7.2, 8.9, 8.2, 8.7, 8.7, 6.8, 11.0, 6.3, 8.0, 5.6];
+    const employmentData = [55.7, 43.3, 62.5, 53.3, 67.6, 54.5, 37.5, 46.9, 37.9, 83.3, 53.8, 36.8, 47.4, 52.0, 51.6, 53.3, 57.9, 60.9, 65.2, 50.0, 60.0, 60.0, 55.2, 40.0, 31.3];
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: '신입생 경쟁률 (n:1)',
+                    data: competitionData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    yAxisID: 'y',
+                    tension: 0.3,
+                    fill: false,
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                },
+                {
+                    label: '취업률 (%)',
+                    data: employmentData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    yAxisID: 'y1',
+                    tension: 0.3,
+                    fill: false,
+                    pointRadius: 5,
+                    pointHoverRadius: 8
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: { display: true, text: '경쟁률 (n:1)' }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: { drawOnChartArea: false },
+                    title: { display: true, text: '취업률 (%)' }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) { label += ': '; }
+                            label += context.parsed.y;
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
