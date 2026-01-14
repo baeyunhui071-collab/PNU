@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big Data Analysis Portfolio | 배윤희</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 세련된 물방울 및 유기적 형태 (Organic Shapes) */
+        .blob-shape-1 { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        .blob-shape-2 { border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%; }
+        .blob-shape-3 { border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%; }
+        .blob-shape-4 { border-radius: 40% 60% 74% 26% / 74% 32% 68% 26%; }
+        .blob-shape-5 { border-radius: 25% 75% 33% 67% / 61% 25% 75% 39%; }
+
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            background: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) rotate(1deg);
+            box-shadow: 0 30px 40px rgba(59, 130, 246, 0.12);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(45, 212, 191, 0.08) 0, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-mesh text-slate-800 antialiased">
+
+    <!-- Hero Section -->
+    <header class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 pt-20">
+        <div class="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-100/50 rounded-full">
+            2024 Big Data Analysis Course
+        </div>
+        
+        <!-- User Info Section -->
+        <div class="mb-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+                부산여자고등학교 <span class="gradient-text">배윤희</span>
+            </h2>
+            <p class="text-sm md:text-base text-slate-500 font-medium tracking-tight">
+                부산대학교에서 <span class="text-blue-500 font-bold border-b-2 border-blue-200">배윤희</span>가 직접 만든 분석 페이지들입니다!
+            </p>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
+            데이터 속의 통찰, <br> <span class="gradient-text">나의 포트폴리오</span>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium">
+            정형화된 틀을 깨고 데이터의 흐름을 유연하게 분석했습니다.<br>
+            다섯 가지 프로젝트에 담긴 배윤희만의 결과물을 확인해보세요.
+        </p>
+    </header>
+
+    <!-- Project Grid Section -->
+    <main class="max-w-7xl mx-auto px-6 pb-32 mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Project 01 -->
+            <a href="01.html" class="project-card blob-shape-1 p-12 flex flex-col aspect-square justify-center text-center">
+                <div class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-sm">
+                    <i class="fa-solid fa-car-burst"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">음주운전 <br>사고 데이터 분석</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 px-4">
+                    위험 패턴을 도출하고 사고 발생 현황을 입체적으로 분석했습니다.
+                </p>
+                <div class="text-blue-500 font-bold text-xs uppercase tracking-widest group">
+                    View Project <i class="fa-solid fa-arrow-right ml-1 transition-transform group-hover:translate-x-1"></i>
+                </div>
+            </a>
+
+            <!-- Project 02 -->
+            <a href="02.html" class="project-card blob-shape-2 p-12 flex flex-col aspect-square justify-center text-center">
+                <div class="w-16 h-16 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-sm">
+                    <i class="fa-solid fa-temperature-arrow-up"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">지구 온난화 <br>변화 추이</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 px-4">
+                    기온과 탄소 농도의 상관관계를 데이터 시각화로 풀어냈습니다.
+                </p>
+                <div class="text-blue-500 font-bold text-xs uppercase tracking-widest group">
+                    View Project <i class="fa-solid fa-arrow-right ml-1"></i>
+                </div>
+            </a>
+
+            <!-- Project 03 -->
+            <a href="03.html" class="project-card blob-shape-3 p-12 flex flex-col aspect-square justify-center text-center">
+                <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-sm">
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">대한민국 <br>인터넷 이용 행태</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 px-4">
+                    디지털 전환의 속도를 연령별/매체별 데이터로 증명했습니다.
+                </p>
+                <div class="text-blue-500 font-bold text-xs uppercase tracking-widest group">
+                    View Project <i class="fa-solid fa-arrow-right ml-1"></i>
+                </div>
+            </a>
+
+            <!-- Project 04 -->
+            <a href="04.html" class="project-card blob-shape-4 p-12 flex flex-col aspect-square justify-center text-center">
+                <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-sm">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">부산대 취업률 <br>및 경쟁률 분석</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 px-4">
+                    입시 경쟁률과 실제 취업 성과 사이의 유의미한 관계를 찾았습니다.
+                </p>
+                <div class="text-blue-500 font-bold text-xs uppercase tracking-widest group">
+                    View Project <i class="fa-solid fa-arrow-right ml-1"></i>
+                </div>
+            </a>
+
+            <!-- Project 05 -->
+            <a href="05.html" class="project-card blob-shape-5 p-12 flex flex-col aspect-square justify-center text-center">
+                <div class="w-16 h-16 bg-purple-50 text-purple-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-3xl shadow-sm">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-slate-800">AI 윤리 <br>콘텐츠 분석</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 px-4">
+                    새로운 기술에 대한 사회적 담론을 유튜브 데이터를 통해 분석했습니다.
+                </p>
+                <div class="text-blue-500 font-bold text-xs uppercase tracking-widest group">
+                    View Project <i class="fa-solid fa-arrow-right ml-1"></i>
+                </div>
+            </a>
+
+            <!-- Info Section -->
+            <div class="flex flex-col items-center justify-center p-8 text-center bg-white/30 rounded-[3rem] border-2 border-dashed border-slate-200">
+                <div class="text-3xl mb-4 text-blue-300">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <p class="text-slate-400 text-sm font-medium">
+                    "데이터는 거짓말을 하지 않지만, <br>해석은 우리의 몫입니다."
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-16 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-slate-800 font-bold text-lg mb-2">부산여자고등학교 배윤희</p>
+            <p class="text-slate-400 text-xs tracking-widest uppercase">
+                &copy; 2024 Pusan National University Data Analysis Lab.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
