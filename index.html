@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>배윤희 | 데이터 속의 통찰, 나의 포트폴리오 🌸</title>
+    <title>배윤희 | 데이터 속의 통찰, 나의 포트폴리오 ✨</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,34 +12,20 @@
         
         body {
             font-family: 'Gaegu', cursive;
-            background-color: #fffafb;
+            background-color: #fff1f2; /* 부드러운 분홍색 배경 */
+            /* 배경 격자 무늬: 도트 크기와 간격 */
+            background-image: radial-gradient(#fbcfe8 3px, transparent 3px);
+            background-size: 40px 40px;
             overflow-x: hidden;
             color: #334155;
         }
 
-        /* 배경 꽃잎 애니메이션 */
-        @keyframes petal-fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        .petal {
-            position: fixed;
-            top: -10%;
-            pointer-events: none;
-            z-index: -1;
-            animation: petal-fall linear infinite;
-            filter: blur(1px);
-        }
-
-        /* 카드 디자인: 둥글둥글한 원형/조약돌 스타일 */
+        /* 카드 디자인: 조약돌 모양 + 귀여운 점선 테두리 */
         .project-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; 
-            border: 2px solid transparent;
+            border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%; 
+            border: 3px dashed transparent; 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             aspect-ratio: 1 / 1; 
             display: flex;
@@ -48,24 +34,29 @@
             align-items: center;
             padding: 2.5rem;
             text-align: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(244, 114, 182, 0.1);
+            position: relative;
         }
 
-        /* 카드별 알록달록한 보더 및 배경 포인트 */
-        .card-red:hover { border-color: #fecaca; box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.1); }
-        .card-green:hover { border-color: #bbf7d0; box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.1); }
-        .card-blue:hover { border-color: #bfdbfe; box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1); }
-        .card-indigo:hover { border-color: #c7d2fe; box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1); }
-        .card-pink:hover { border-color: #fbcfe8; box-shadow: 0 20px 25px -5px rgba(236, 72, 153, 0.1); }
-        .card-purple:hover { border-color: #e9d5ff; box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.1); }
+        /* 카드별 알록달록한 점선 테두리 */
+        .card-red { border-color: #fecaca; }
+        .card-green { border-color: #bbf7d0; }
+        .card-yellow { border-color: #fde68a; } 
+        .card-blue { border-color: #bfdbfe; }
+        .card-pink { border-color: #fbcfe8; }
+        .card-purple { border-color: #e9d5ff; }
 
+        /* 터치/호버 시 효과 변경: 선 종류 변경 대신 '확대 + 글로우' 효과 */
         .project-card:hover {
-            transform: translateY(-10px) rotate(1deg);
+            transform: translateY(-15px) scale(1.05); /* 조금 더 커지게 */
             background: #ffffff;
+            border-width: 5px; /* 테두리가 더 두꺼워짐 */
+            box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.6), 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
         .flower-gradient-text {
-            background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+            background: linear-gradient(135deg, #db2777 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -76,7 +67,7 @@
             padding: 0.25rem 0.9rem;
             border-radius: 1rem;
             margin-bottom: 1.25rem;
-            border: 1px solid currentColor;
+            border: 2px solid currentColor;
         }
 
         /* 본 제목 크기 강조 */
@@ -96,39 +87,37 @@
 
         .view-more {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .view-more {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- 배경 애니메이션 요소 -->
-    <div class="petal" style="left: 10%; animation-duration: 10s;">🌸</div>
-    <div class="petal" style="left: 30%; animation-duration: 14s; animation-delay: 2s;">🌸</div>
-    <div class="petal" style="left: 55%; animation-duration: 16s; animation-delay: 5s;">💮</div>
-    <div class="petal" style="left: 75%; animation-duration: 12s; animation-delay: 1s;">🌸</div>
-    <div class="petal" style="left: 90%; animation-duration: 15s; animation-delay: 3s;">💮</div>
-
     <!-- Header Section -->
     <header class="max-w-5xl mx-auto pt-24 pb-16 text-center px-6">
-        <div class="inline-flex items-center gap-2 px-5 py-2 mb-8 text-lg font-bold text-pink-600 bg-pink-50 rounded-full border-2 border-pink-100 shadow-sm">
-            🌷 2026 배윤희의 데이터 정원 🌷
+        <div class="inline-flex items-center gap-2 px-5 py-2 mb-8 text-lg font-bold text-pink-600 bg-white rounded-full border-2 border-pink-200 shadow-sm">
+            ✨ 2026 배윤희의 데이터 다이어리 ✨
         </div>
         
         <div class="mb-4">
             <h2 class="text-3xl font-bold text-slate-700 mb-2">
-                부산여자고등학교 <span class="text-pink-600">배윤희</span>
+                부산여자고등학교 <span class="text-pink-500">배윤희</span>
             </h2>
         </div>
 
         <h1 class="text-5xl md:text-7xl font-bold mb-8 tracking-tight text-slate-900 leading-tight">
-            데이터 속의 <span class="flower-gradient-text">통찰,</span> <br> 나의 포트폴리오
+            데이터 속의 <span class="flower-gradient-text">인사이트,</span> <br> 나의 포트폴리오
         </h1>
         
-        <p class="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium">
+        <p class="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
             객관적인 수치 너머의 의미를 탐구하며 사회를 관찰합니다.<br>
             그동안 쌓아온 데이터 분석 기록들을 정성껏 담았습니다.
         </p>
@@ -139,74 +128,74 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             
             <!-- Project 01 -->
-            <a href="01.html" class="project-card card-red border-red-50">
+            <a href="01.html" class="project-card card-red">
                 <span class="tag bg-red-50 text-red-500">교통공학</span>
                 <h3 class="project-title">음주운전 사고 <br>데이터 분석 🚗</h3>
                 <p class="desc mb-6">
                     최근 5년간의 사고 통계 자료를 활용하여 지역적 특성과 사고 발생 시점을 객관적으로 분석하고 정책적 시사점을 도출하였습니다.
                 </p>
                 <div class="view-more text-red-500">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
             <!-- Project 02 -->
-            <a href="02.html" class="project-card card-green border-green-50">
+            <a href="02.html" class="project-card card-green">
                 <span class="tag bg-green-50 text-green-600">환경과학</span>
                 <h3 class="project-title">지구 온난화 <br>변화 추이 분석 🌿</h3>
                 <p class="desc mb-6">
                     글로벌 기온 데이터와 탄소 배출량 지표를 결합하여 기후 변화의 가속화 경향을 시계열 분석 기법으로 검증하였습니다.
                 </p>
                 <div class="view-more text-green-600">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
             <!-- Project 03 -->
-            <a href="03.html" class="project-card card-blue border-blue-50">
-                <span class="tag bg-blue-50 text-blue-600">사회조사</span>
+            <a href="03.html" class="project-card card-yellow">
+                <span class="tag bg-yellow-50 text-yellow-600">사회조사</span>
                 <h3 class="project-title">국내 인터넷 <br>이용 행태 조사 🌐</h3>
                 <p class="desc mb-6">
                     연령대별 이용 시간 및 목적 데이터를 정량 분석하여 한국 사회의 디지털 전환 양상을 다각도에서 진단하였습니다.
                 </p>
-                <div class="view-more text-blue-600">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                <div class="view-more text-yellow-600">
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
             <!-- Project 04 -->
-            <a href="04.html" class="project-card card-indigo border-indigo-50">
-                <span class="tag bg-indigo-50 text-indigo-600">교육/취업</span>
-                <h3 class="project-title">부산대 신입생 <br>경쟁률 대비 취업률 🎓</h3>
+            <a href="04.html" class="project-card card-blue">
+                <span class="tag bg-blue-50 text-blue-600">교육/취업</span>
+                <h3 class="project-title">부산대 경쟁률 <br>대비 취업률 🎓</h3>
                 <p class="desc mb-6">
                     자연과학 계열의 경쟁률과 졸업생 취업 현황을 교차 분석하여 전공 선호도와 고용 시장 간의 실질적인 관계를 연구하였습니다.
                 </p>
-                <div class="view-more text-indigo-600">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                <div class="view-more text-blue-600">
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
             <!-- Project 05 -->
-            <a href="05.html" class="project-card card-pink border-pink-50">
+            <a href="05.html" class="project-card card-pink">
                 <span class="tag bg-pink-50 text-pink-600">미디어 분석</span>
                 <h3 class="project-title">케데헌 <br>시청자 반응 분석 🎶</h3>
                 <p class="desc mb-6">
                     '케데헌' 채널의 댓글 데이터를 활용하여 자연어 처리를 통한 감성 분석 및 핵심 키워드를 추출하였습니다.
                 </p>
                 <div class="view-more text-pink-600">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
             <!-- Project 06 -->
-            <a href="06.html" class="project-card card-purple border-purple-50">
+            <a href="06.html" class="project-card card-purple">
                 <span class="tag bg-purple-50 text-purple-600">AI 윤리</span>
                 <h3 class="project-title">AI 윤리 <br>콘텐츠 분석 🤖</h3>
                 <p class="desc mb-6">
                     인공지능 윤리 가이드라인에 대한 대중의 인식 변화를 조사하고, 규범적 합의 형성 과정을 데이터로 고찰하였습니다.
                 </p>
                 <div class="view-more text-purple-600">
-                    상세보기 <i class="fa-solid fa-circle-arrow-right"></i>
+                    상세보기 <i class="fa-solid fa-sparkles"></i>
                 </div>
             </a>
 
@@ -214,9 +203,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-24 bg-white border-t border-slate-100 text-center px-6">
+    <footer class="py-24 bg-white border-t border-pink-100 text-center px-6">
         <div class="max-w-4xl mx-auto">
-            <p class="text-2xl font-bold text-slate-800 mb-3">부산여자고등학교 배윤희 🌸</p>
+            <p class="text-2xl font-bold text-slate-800 mb-3">부산여자고등학교 배윤희 ✨</p>
             <p class="text-slate-400 text-sm uppercase tracking-widest font-bold">
                 &copy; 2026 Pusan National University Data Analysis Lab.
             </p>
