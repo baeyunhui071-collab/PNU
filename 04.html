@@ -3,92 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부산대 자연과학계열 데이터 센터</title>
+    <title>PNU 자연과학 데이터 센터</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #003a72; --secondary: #ce1126; --bg: #f4f7f9; }
-        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 1200px; margin: auto; }
+        :root { --primary: #003a72; --secondary: #ce1126; --bg: #f0f2f5; --white: #ffffff; }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg); margin: 0; padding: 0; color: #333; }
         
-        /* Header & Dashboard Stats */
+        /* 상단 내비게이션 바 */
+        nav { 
+            background: var(--primary); 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-logo { color: white; font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+        .home-btn { 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .home-btn:hover { background: white; color: var(--primary); }
+
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        
         header { text-align: center; margin-bottom: 40px; }
-        header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+        header h1 { font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }
+
         .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .card { background: white; padding: 20px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { font-size: 0.9rem; color: #666; margin: 0; }
-        .card p { font-size: 1.8rem; font-weight: 800; margin: 10px 0; color: var(--primary); }
-        .card span { font-size: 0.9rem; color: #888; }
+        .card { background: var(--white); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .card h3 { font-size: 0.9rem; color: #666; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        .card p { font-size: 2rem; font-weight: 800; margin: 10px 0; color: var(--primary); }
+        .card .dept-name { font-size: 1rem; color: var(--secondary); font-weight: 600; }
 
-        /* Chart Section */
-        .section { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 40px; }
-        .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; display: flex; align-items: center; border-left: 5px solid var(--primary); padding-left: 15px; }
-        .chart-container { height: 500px; width: 100%; }
+        .section { background: var(--white); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px; }
+        .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .chart-container { height: 450px; width: 100%; }
 
-        /* Table Section */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
-        th { background: #f8f9fa; color: var(--primary); font-weight: 700; text-align: left; padding: 15px; border-bottom: 2px solid #eee; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; padding: 15px; text-align: left; border-bottom: 2px solid #eee; }
         td { padding: 15px; border-bottom: 1px solid #eee; }
-        tr:hover { background-color: #fcfcfc; }
-        .badge { padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
-        .high { background: #e6f3ff; color: #007bff; }
-        .success { background: #fff0f0; color: #dc3545; }
+        .badge { padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }
+        .bg-blue { background: #eef6ff; color: #007bff; }
+        .bg-red { background: #fff1f1; color: #d63031; }
     </style>
 </head>
 <body>
 
+<nav>
+    <a href="#" class="nav-logo">PNU DATA CENTER</a>
+    <a href="javascript:location.reload()" class="home-btn">🏠 HOME</a>
+</nav>
+
 <div class="container">
     <header>
-        <h1>PNU 자연과학계열 데이터 대시보드</h1>
-        <p>2025 신입생 경쟁률 및 취업률 통합 분석 보고서</p>
+        <h1>2025 자연과학계열 취업·경쟁률 분석</h1>
+        <p>부산대학교 학과별 실무 데이터 리포트</p>
     </header>
 
     <div class="dashboard">
         <div class="card">
-            <h3>최고 경쟁률 학과</h3>
+            <h3>Top Competition</h3>
             <p>11.0 : 1</p>
-            <span>통계학과</span>
+            <div class="dept-name">통계학과</div>
         </div>
         <div class="card">
-            <h3>최고 취업률 학과</h3>
+            <h3>Top Employment</h3>
             <p>83.3 %</p>
-            <span>생명환경화학과</span>
+            <div class="dept-name">생명환경화학과</div>
         </div>
         <div class="card">
-            <h3>평균 취업률</h3>
-            <p>53.2 %</p>
-            <span>전체 25개 학과 평균</span>
+            <h3>Efficiency Pick</h3>
+            <p>67.6 %</p>
+            <div class="dept-name">물리학과</div>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">경쟁률 vs 취업률 추이 분석</div>
+        <div class="section-title">데이터 시각화 차트</div>
         <div class="chart-container">
             <canvas id="mainChart"></canvas>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-title">전체 학과 상세 데이터 리스트 (25개)</div>
+        <div class="section-title">전체 25개 학과 리스트</div>
         <div style="overflow-x: auto;">
             <table>
                 <thead>
                     <tr>
                         <th>학과명</th>
-                        <th>신입생 경쟁률 (n:1)</th>
-                        <th>취업률 (%)</th>
-                        <th>특이사항</th>
+                        <th>신입생 경쟁률</th>
+                        <th>졸업생 취업률</th>
+                        <th>분석 결과</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
-                    </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </div>
     </div>
 </div>
 
 <script>
+    // [데이터 소스: 제공해주신 그래프 수치 기준]
     const data = [
         {dept: '간호학과', comp: 8.0, job: 55.7}, {dept: '대기환경과학과', comp: 10.7, job: 43.3},
         {dept: '동물생명자원과학과', comp: 10.5, job: 62.5}, {dept: '물리교육과', comp: 7.1, job: 53.3},
@@ -105,54 +132,30 @@
         {dept: '화학교육과', comp: 5.6, job: 31.3}
     ];
 
-    // 테이블 자동 생성
     const tableBody = document.getElementById('tableBody');
     data.forEach(item => {
-        const row = `<tr>
-            <td><strong>${item.dept}</strong></td>
-            <td><span class="badge high">${item.comp}:1</span></td>
-            <td><span class="badge success">${item.job}%</span></td>
-            <td>${item.job >= 60 ? '✅ 취업우수' : item.comp >= 10 ? '🔥 고경쟁' : '-'}</td>
-        </tr>`;
-        tableBody.innerHTML += row;
+        const status = item.job >= 65 ? '🌟 우수' : (item.comp >= 10 ? '🔥 인기' : '기본');
+        tableBody.innerHTML += `
+            <tr>
+                <td><strong>${item.dept}</strong></td>
+                <td><span class="badge bg-blue">${item.comp}:1</span></td>
+                <td><span class="badge bg-red">${item.job}%</span></td>
+                <td>${status}</td>
+            </tr>`;
     });
 
-    // 차트 생성
     const ctx = document.getElementById('mainChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: data.map(d => d.dept),
             datasets: [
-                {
-                    label: '경쟁률 (n:1)',
-                    data: data.map(d => d.comp),
-                    backgroundColor: 'rgba(0, 58, 114, 0.7)',
-                    yAxisID: 'y',
-                    order: 2
-                },
-                {
-                    label: '취업률 (%)',
-                    data: data.map(d => d.job),
-                    borderColor: '#ce1126',
-                    type: 'line',
-                    yAxisID: 'y1',
-                    borderWidth: 3,
-                    pointBackgroundColor: '#ce1126',
-                    order: 1
-                }
+                { label: '경쟁률', data: data.map(d => d.comp), backgroundColor: '#003a72' },
+                { label: '취업률(%)', data: data.map(d => d.job), type: 'line', borderColor: '#ce1126', borderWidth: 2, yAxisID: 'y1' }
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: { beginAtZero: true, title: { display: true, text: '경쟁률' } },
-                y1: { position: 'right', beginAtZero: true, title: { display: true, text: '취업률 (%)' } }
-            },
-            plugins: {
-                legend: { position: 'top' }
-            }
+            scales: { y: { beginAtZero: true }, y1: { position: 'right', beginAtZero: true } }
         }
     });
 </script>
