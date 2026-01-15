@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 기술의 진화와 사회적 신뢰의 위기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Pretendard', sans-serif; 
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            background: #fdfdff;
+        }
+
+        /* 매혹적인 메쉬 배경 */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #fdfdff;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(225, 29, 72, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(79, 70, 229, 0.1) 0px, transparent 50%);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .tab-button {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-button.active {
+            transform: scale(1.05);
+            background: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        #btn-security.active { border-bottom: 4px solid #3b82f6; color: #3b82f6; }
+        #btn-copyright.active { border-bottom: 4px solid #6366f1; color: #6366f1; }
+        #btn-deepfake.active { border-bottom: 4px solid #f43f5e; color: #f43f5e; }
+
+        .deepfake-pattern {
+            background-image: radial-gradient(rgba(244, 63, 94, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .rainbow-text {
+            background: linear-gradient(to right, #3b82f6, #6366f1, #f43f5e, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <div class="mesh-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500 py-6 px-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="flex items-center gap-2 group px-4 py-2 bg-white/50 backdrop-blur-md rounded-2xl border border-white hover:bg-white hover:shadow-xl transition-all duration-300">
+                    <i data-lucide="home" class="w-5 h-5 text-slate-700 group-hover:text-blue-600"></i>
+                    <span class="text-sm font-black text-slate-800 tracking-widest">HOME</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 via-indigo-600 to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg animate-pulse">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-black text-2xl tracking-tighter italic bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500">AI.VISION</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-2 p-1 bg-white/30 backdrop-blur-lg rounded-2xl border border-white/50 shadow-inner">
+                <button onclick="switchTab('security')" class="nav-link px-4 py-2 text-xs font-black text-slate-500 rounded-xl hover:bg-white/50 transition-all" data-target="security">SECURITY</button>
+                <button onclick="switchTab('copyright')" class="nav-link px-4 py-2 text-xs font-black text-slate-500 rounded-xl hover:bg-white/50 transition-all" data-target="copyright">COPYRIGHT</button>
+                <button onclick="switchTab('deepfake')" class="nav-link px-4 py-2 text-xs font-black text-slate-500 rounded-xl hover:bg-white/50 transition-all" data-target="deepfake">DEEPFAKE</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-56 pb-32 px-6">
+        <div class="max-w-6xl mx-auto text-center relative">
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 bg-white rounded-full border border-slate-100 shadow-xl mb-12 animate-bounce">
+                <span class="flex h-3 w-3 rounded-full bg-blue-500"></span>
+                <span class="text-xs font-black text-blue-600 uppercase tracking-[0.3em]">2024 Special Report</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-9xl font-black mb-10 tracking-tight leading-[0.95] text-slate-900">
+                알고리즘 속에<br />
+                <span class="rainbow-text">숨겨진 진실</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto mb-16 leading-relaxed font-semibold">
+                AI의 화려한 진화 뒤에 도사린 보안의 균열과 창작의 논란,<br class="hidden md:block" /> 
+                그리고 딥페이크가 던지는 신뢰의 의문을 탐구합니다.
+            </p>
+
+            <button onclick="document.getElementById('content-area').scrollIntoView()" class="group relative px-16 py-6 bg-slate-900 text-white rounded-3xl font-black text-lg overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.2)] hover:scale-105 transition-all active:scale-95">
+                <span class="relative z-10">리포트 심층 탐색</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </button>
+        </div>
+    </section>
+
+    <!-- Tab Section -->
+    <section id="content-area" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Navigation Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-20">
+                <button onclick="switchTab('security')" id="btn-security" class="tab-button active flex flex-col items-center gap-2 px-10 py-6 rounded-[2rem] bg-white shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="lock" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-sm font-black uppercase tracking-widest">데이터 보안</span>
+                </button>
+                <button onclick="switchTab('copyright')" id="btn-copyright" class="tab-button flex flex-col items-center gap-2 px-10 py-6 rounded-[2rem] bg-white/50 border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-sm font-black uppercase tracking-widest">창작 윤리</span>
+                </button>
+                <button onclick="switchTab('deepfake')" id="btn-deepfake" class="tab-button flex flex-col items-center gap-2 px-10 py-6 rounded-[2rem] bg-white/50 border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="scan-eye" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-sm font-black uppercase tracking-widest">딥페이크</span>
+                </button>
+            </div>
+
+            <!-- Content Card -->
+            <div class="bg-white/40 backdrop-blur-2xl rounded-[4rem] p-10 md:p-20 shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-white overflow-hidden relative">
+                
+                <!-- Security Content -->
+                <div id="tab-security" class="tab-content active">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-8">
+                            <h3 class="text-5xl font-black text-slate-900 leading-[1.1] tracking-tighter">데이터 주권,<br/><span class="text-blue-600 underline decoration-blue-200 underline-offset-8">절대 신뢰</span>의 영역</h3>
+                            <p class="text-xl text-slate-600 leading-relaxed font-medium">
+                                AI 학습 모델에 무분별하게 유입되는 데이터는 양날의 검입니다. 기업의 핵심 기밀과 개인의 민감 정보가 알고리즘 속에 녹아들지 않도록 철저한 '방화벽'이 필요합니다.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="p-6 bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl text-white shadow-xl shadow-blue-200 group hover:translate-x-4 transition-transform">
+                                    <h4 class="font-black mb-1">프라이빗 LLM 인프라</h4>
+                                    <p class="text-sm text-blue-50">기업 전용 서버에서만 구동되는 안전한 지능형 모델</p>
+                                </div>
+                                <div class="p-6 bg-white border border-blue-100 rounded-3xl shadow-sm flex items-center gap-5">
+                                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-black">01</div>
+                                    <p class="text-slate-700 font-bold tracking-tight">실시간 PII 감지 및 마스킹 기술 고도화</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-blue-400/20 blur-3xl rounded-full"></div>
+                            <div class="relative bg-white p-4 rounded-[3rem] shadow-2xl border border-slate-50">
+                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="rounded-[2.5rem] w-full object-cover aspect-square" alt="Security Illustration">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copyright Content -->
+                <div id="tab-copyright" class="tab-content">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="order-2 lg:order-1 relative">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-4">
+                                    <div class="h-64 bg-indigo-100 rounded-[2.5rem] flex items-center justify-center p-8">
+                                        <i data-lucide="feather" class="w-20 h-20 text-indigo-400"></i>
+                                    </div>
+                                    <div class="h-48 bg-indigo-600 rounded-[2.5rem] p-8 text-white">
+                                        <h4 class="font-black text-xl mb-2">Originality</h4>
+                                        <p class="text-xs text-indigo-100">모든 영감의 원천은 인간입니다.</p>
+                                    </div>
+                                </div>
+                                <div class="pt-12 space-y-4">
+                                    <div class="h-48 bg-indigo-400 rounded-[2.5rem] p-8 text-white">
+                                        <h4 class="font-black text-xl mb-2">Justice</h4>
+                                        <p class="text-xs text-indigo-50 font-medium">정당한 보상이 창작을 지속하게 합니다.</p>
+                                    </div>
+                                    <div class="h-64 bg-slate-50 border border-indigo-100 rounded-[2.5rem] flex items-center justify-center p-8">
+                                        <i data-lucide="palette" class="w-20 h-20 text-indigo-600"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2 space-y-8">
+                            <h3 class="text-5xl font-black text-slate-900 leading-[1.1] tracking-tighter">창작자의 붓을<br/>지키는 <span class="text-indigo-600">새로운 법</span></h3>
+                            <p class="text-xl text-slate-600 leading-relaxed font-medium">
+                                AI가 학습하는 데이터는 누군가의 피와 땀입니다. 기술의 발전이 예술을 도용하는 것이 아니라, 예술을 확장하는 도구가 되도록 지적재산권의 정의를 다시 써야 합니다.
+                            </p>
+                            <div class="p-8 bg-indigo-50 border-l-8 border-indigo-600 rounded-r-[2rem]">
+                                <p class="text-indigo-900 font-black text-lg mb-2">공정 이용(Fair Use) 가이드라인</p>
+                                <p class="text-indigo-700/70 leading-relaxed font-medium">상업적 목적의 학습 시 원작자에게 수익을 분배하는 정교한 시스템 구축이 시급합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deepfake Content (Colorful & Expanded) -->
+                <div id="tab-deepfake" class="tab-content relative">
+                    <div class="absolute inset-0 deepfake-pattern opacity-40 -z-10 rounded-[3.5rem]"></div>
+                    
+                    <div class="space-y-16">
+                        <div class="text-center max-w-4xl mx-auto space-y-6">
+                            <h3 class="text-6xl font-black text-slate-900 tracking-tighter leading-[1] mb-4">가짜가 빚어낸<br/><span class="text-rose-600">신뢰의 균열</span></h3>
+                            <p class="text-xl text-slate-500 font-bold leading-relaxed">
+                                '보는 것이 믿는 것'이라는 인류의 오래된 전제가 무너지고 있습니다.<br/>
+                                정교한 딥페이크는 이제 사회 안전망을 흔드는 가장 위험한 무기가 되었습니다.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- 정치적 선동 Card -->
+                            <div class="group relative bg-white rounded-[3rem] p-12 border border-rose-100 shadow-[0_20px_60px_-15px_rgba(244,63,94,0.15)] hover:shadow-rose-300/30 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 opacity-[0.03] group-hover:opacity-[0.1] transition-opacity">
+                                    <i data-lucide="megaphone" class="w-64 h-64 text-rose-600"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <div class="w-16 h-16 bg-rose-600 text-white rounded-2xl flex items-center justify-center mb-10 shadow-lg shadow-rose-200">
+                                        <i data-lucide="flame" class="w-8 h-8"></i>
+                                    </div>
+                                    <h4 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">정치적 선동 및<br/>여론 조작의 위협</h4>
+                                    <p class="text-slate-600 leading-relaxed font-medium text-lg">
+                                        선거 직전 유포되는 가짜 후보 연설이나 조작된 사건 영상은 유권자의 판단을 흐리게 합니다. 이는 단순한 허위 사실 유포를 넘어 국가 민주주의의 근간을 뿌리째 흔드는 결과를 초래합니다.
+                                    </p>
+                                    <div class="mt-10 flex items-center gap-3">
+                                        <span class="px-4 py-2 bg-rose-50 text-rose-600 rounded-full text-xs font-black uppercase tracking-widest">High Severity</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 금융 보안 Card -->
+                            <div class="group relative bg-slate-900 rounded-[3rem] p-12 shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                                <div class="absolute -right-10 -bottom-10 opacity-[0.05] group-hover:opacity-[0.15] transition-opacity">
+                                    <i data-lucide="banknote" class="w-64 h-64 text-amber-500"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <div class="w-16 h-16 bg-amber-500 text-slate-900 rounded-2xl flex items-center justify-center mb-10 shadow-lg shadow-amber-500/30">
+                                        <i data-lucide="wallet" class="w-8 h-8"></i>
+                                    </div>
+                                    <h4 class="text-3xl font-black text-white mb-6 tracking-tight">지능형 금융 사기 및<br/>보안 인증 무력화</h4>
+                                    <p class="text-slate-400 leading-relaxed font-medium text-lg">
+                                        목소리와 얼굴을 똑같이 복제한 딥페이크는 비대면 금융 시대의 아킬레스건입니다. CEO 사칭 송금 지시부터 지인 사칭 보이스피싱까지, 기술의 정교함은 개인의 소중한 자산을 위협합니다.
+                                    </p>
+                                    <div class="mt-10 flex items-center gap-3">
+                                        <span class="px-4 py-2 bg-amber-500/10 text-amber-500 rounded-full text-xs font-black uppercase tracking-widest">Complex Defense</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Solutions Section -->
+                        <div class="bg-gradient-to-tr from-rose-600 via-rose-500 to-amber-500 rounded-[3.5rem] p-10 md:p-16 text-white shadow-2xl relative">
+                            <h4 class="text-4xl font-black mb-12 italic tracking-tighter">어떻게 대응할 것인가?</h4>
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                                <div class="space-y-4 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
+                                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                                    <h5 class="font-black text-lg">디지털 워터마킹</h5>
+                                    <p class="text-xs text-rose-100 font-medium leading-relaxed">콘텐츠 생성 시 원본과 수정 이력을 담은 식별 코드 강제 삽입</p>
+                                </div>
+                                <div class="space-y-4 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
+                                    <i data-lucide="eye" class="w-8 h-8"></i>
+                                    <h5 class="font-black text-lg">AI 역탐지 필터</h5>
+                                    <p class="text-xs text-rose-100 font-medium leading-relaxed">육안으로 판별 불가능한 미세 노이즈를 찾아내는 탐지 모델 가동</p>
+                                </div>
+                                <div class="space-y-4 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
+                                    <i data-lucide="gavel" class="w-8 h-8"></i>
+                                    <h5 class="font-black text-lg">징벌적 처벌 강화</h5>
+                                    <p class="text-xs text-rose-100 font-medium leading-relaxed">악의적 가짜 정보 생성 및 유포 시 사회적 파장에 상응하는 처벌</p>
+                                </div>
+                                <div class="space-y-4 p-6 bg-white/10 backdrop-blur-md rounded-3xl border border-white/20">
+                                    <i data-lucide="brain" class="w-8 h-8"></i>
+                                    <h5 class="font-black text-lg">리터러시 교육</h5>
+                                    <p class="text-xs text-rose-100 font-medium leading-relaxed">정보의 출처를 의심하고 교차 검증하는 시민 사회의 비판적 태도</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Strategy Action -->
+    <section class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="p-10 bg-blue-600 rounded-[3rem] text-white shadow-2xl hover:scale-105 transition-transform">
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] opacity-60 mb-8">Personal Action</h4>
+                    <h5 class="text-3xl font-black mb-6">스마트한 경계</h5>
+                    <p class="text-blue-100 leading-relaxed font-medium">개인의 데이터 흐름을 스스로 통제하고, 자극적인 콘텐츠일수록 출처를 의심하는 디지털 에티켓이 필요합니다.</p>
+                </div>
+                <div class="p-10 bg-indigo-600 rounded-[3rem] text-white shadow-2xl hover:scale-105 transition-transform lg:translate-y-12">
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] opacity-60 mb-8">Corporate Ethics</h4>
+                    <h5 class="text-3xl font-black mb-6">윤리적 개발</h5>
+                    <p class="text-indigo-100 leading-relaxed font-medium">속도보다 중요한 것은 방향입니다. 기술의 안전성을 담보할 수 없는 서비스는 출시하지 않는 단호한 윤리가 기업의 자산입니다.</p>
+                </div>
+                <div class="p-10 bg-rose-600 rounded-[3rem] text-white shadow-2xl hover:scale-105 transition-transform">
+                    <h4 class="text-xs font-black uppercase tracking-[0.3em] opacity-60 mb-8">Social Protocol</h4>
+                    <h5 class="text-3xl font-black mb-6">제도적 보호</h5>
+                    <p class="text-rose-100 leading-relaxed font-medium">법은 기술보다 느릴 수 있지만, 결코 멈춰서는 안 됩니다. 딥페이크와 정보 탈취로부터 약자를 보호할 법적 그물을 촘촘히 짜야 합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-32 pb-16 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col items-center text-center gap-12">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-black text-3xl tracking-tighter italic text-slate-900">AI.VISION</span>
+                </div>
+                <p class="text-slate-400 font-bold max-w-xl text-lg">
+                    신뢰는 기술로 쌓고, 진실은 마음으로 지킵니다.
+                </p>
+                <div class="w-full h-px bg-slate-100"></div>
+                <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex items-center gap-3">
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest font-mono">Curated by</span>
+                        <span class="text-sm font-black text-slate-700">배윤희</span>
+                    </div>
+                    <div class="flex gap-8">
+                        <a href="#" class="text-xs font-black text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest">Privacy</a>
+                        <a href="#" class="text-xs font-black text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest">Terms</a>
+                        <a href="#" class="text-xs font-black text-slate-400 hover:text-slate-900 transition-colors uppercase tracking-widest">Inquiry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Icons
+        lucide.createIcons();
+
+        // Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 80) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => {
+                b.classList.remove('active', 'bg-white', 'shadow-sm');
+                b.classList.add('bg-white/50');
+            });
+            document.querySelectorAll('.nav-link').forEach(l => {
+                l.classList.remove('bg-white/50', 'text-slate-900');
+                l.classList.add('text-slate-500');
+            });
+
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const targetBtn = document.getElementById('btn-' + tabId);
+            targetBtn.classList.add('active', 'bg-white', 'shadow-sm');
+            targetBtn.classList.remove('bg-white/50');
+            
+            const activeNavLink = document.querySelector(`.nav-link[data-target="${tabId}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.add('bg-white/50', 'text-slate-900');
+                activeNavLink.classList.remove('text-slate-500');
+            }
+
+            document.getElementById('content-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Init
+        document.querySelector('.nav-link[data-target="security"]').classList.add('bg-white/50', 'text-slate-900');
+    </script>
+</body>
+</html>
